@@ -19,9 +19,15 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "css/bootstrap.min.css",
+        "css/album.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "js/bootstrap.min.js",
+        "js/jquery.slim.min.js",
+        "js/popper.min.js",
+        "js/holder.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
