@@ -102,7 +102,16 @@
             <img class="card-img-top" src="{{atual.sprites.front_default}}" alt="Card image cap">
             <div class="card-body">
               <h4 class="card-text">{{atual.name}}</h4>
+
               <h5 class="card-text">Habilidades:</h5>
+
+
+              <span class="col-sm-4 " *ngFor="let ab of atual.abilities">
+                {{ab.ability.name}}
+              </span>
+
+
+              <h5 class="card-text">Ataques:</h5>
 
 
               <span class="col-sm-4 " *ngFor="let move of atual.moves">
@@ -139,7 +148,16 @@
             <img class="card-img-top" src="{{result.sprites.front_default}}" alt="Card image cap">
             <div class="card-body">
               <h4 class="card-text">{{result.name}}</h4>
+
               <h5 class="card-text">Habilidades:</h5>
+
+              <div class="gigante">
+                <span class="col-sm-4 " *ngFor="let ab of result.abilities">
+                  {{ab.ability.name}}
+                </span>
+              </div>
+
+              <h5 class="card-text">Ataques:</h5>
 
               <div class="gigante">
                 <span class="col-sm-4 " *ngFor="let move of result.moves">

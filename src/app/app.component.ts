@@ -87,6 +87,7 @@ export class AppComponent {
           this.dados_especificos.push({
             'sprites': sub['sprites'] as any[],
             'forms': sub['forms'] as any[],
+            'abilities' : sub['abilities'] as any[],
             'types': sub['types'] as any[],
             'moves': sub['moves'] as any[],
             'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
@@ -115,6 +116,7 @@ export class AppComponent {
           this.dados_especificos.push({
             'sprites': sub['sprites'] as any[],
             'forms': sub['forms'] as any[],
+            'abilities' : sub['abilities'] as any[],
             'types': sub['types'] as any[],
             'moves': sub['moves'] as any[],
             'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
@@ -137,6 +139,7 @@ export class AppComponent {
       this.dados_especificos.push({
         'sprites': sub['sprites'] as any[],
         'forms': sub['forms'] as any[],
+        'abilities' : sub['abilities'] as any[],
         'types': sub['types'] as any[],
         'moves': sub['moves'] as any[],
         'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
@@ -167,6 +170,7 @@ export class AppComponent {
           this.dados_especificos.push({
             'sprites': sub['sprites'] as any[],
             'forms': sub['forms'] as any[],
+            'abilities' : sub['abilities'] as any[],
             'types': sub['types'] as any[],
             'moves': sub['moves'] as any[],
             'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
@@ -198,6 +202,7 @@ export class AppComponent {
 
           this.dados_especificos.push({
             'sprites': sub['sprites'] as any[],
+            'abilities' : sub['abilities'] as any[],
             'forms': sub['forms'] as any[],
             'types': sub['types'] as any[],
             'moves': sub['moves'] as any[],
