@@ -50,7 +50,7 @@ export class AppService {
     }
 
     handleError(error) {
-
+        console.log(error);
         return Observable.throw(error.json().error || 'SERVER ERROR');
     }
 
