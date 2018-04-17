@@ -68,13 +68,12 @@ export class AppComponent {
       this.buscarFiltrandoType();
       console.log(this.txtType);
     } else {
-
+      console.log(' do inicio');
       this.buscarTodos();
     }
   }
 
   buscarFiltrandoType() {
-    this.status_api = 'Funcionando';
 
     this.appservice.buscaFiltroType(this.txtType).subscribe(async data => {
       console.log(data);
@@ -87,7 +86,7 @@ export class AppComponent {
           this.dados_especificos.push({
             'sprites': sub['sprites'] as any[],
             'forms': sub['forms'] as any[],
-            'abilities' : sub['abilities'] as any[],
+            'abilities': sub['abilities'] as any[],
             'types': sub['types'] as any[],
             'moves': sub['moves'] as any[],
             'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
@@ -104,7 +103,6 @@ export class AppComponent {
 
 
   buscarFiltrandoHabilidade() {
-    this.status_api = 'Funcionando';
 
     this.appservice.buscaFiltroHabilidade(this.txtHabilidade).subscribe(async data => {
       console.log(data);
@@ -116,7 +114,7 @@ export class AppComponent {
           this.dados_especificos.push({
             'sprites': sub['sprites'] as any[],
             'forms': sub['forms'] as any[],
-            'abilities' : sub['abilities'] as any[],
+            'abilities': sub['abilities'] as any[],
             'types': sub['types'] as any[],
             'moves': sub['moves'] as any[],
             'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
@@ -132,14 +130,13 @@ export class AppComponent {
   }
 
   buscarFiltrandoNome() {
-    this.status_api = 'Funcionando';
 
     this.appservice.buscaFiltroNome(this.txtNome).subscribe(sub => {
       console.log(sub);
       this.dados_especificos.push({
         'sprites': sub['sprites'] as any[],
         'forms': sub['forms'] as any[],
-        'abilities' : sub['abilities'] as any[],
+        'abilities': sub['abilities'] as any[],
         'types': sub['types'] as any[],
         'moves': sub['moves'] as any[],
         'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
@@ -153,7 +150,6 @@ export class AppComponent {
 
 
   buscarNext() {
-    this.status_api = 'Funcionando';
 
     this.appservice.buscarPokemonEspecifico(this.next_busca).subscribe(async data => {
       this.count_busca = data['count'];
@@ -170,7 +166,7 @@ export class AppComponent {
           this.dados_especificos.push({
             'sprites': sub['sprites'] as any[],
             'forms': sub['forms'] as any[],
-            'abilities' : sub['abilities'] as any[],
+            'abilities': sub['abilities'] as any[],
             'types': sub['types'] as any[],
             'moves': sub['moves'] as any[],
             'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
@@ -185,7 +181,6 @@ export class AppComponent {
 
 
   buscarTodos() {
-    this.status_api = 'Funcionando';
 
     this.appservice.buscaListaCompleta().subscribe(data => {
       this.count_busca = data['count'];
@@ -202,7 +197,7 @@ export class AppComponent {
 
           this.dados_especificos.push({
             'sprites': sub['sprites'] as any[],
-            'abilities' : sub['abilities'] as any[],
+            'abilities': sub['abilities'] as any[],
             'forms': sub['forms'] as any[],
             'types': sub['types'] as any[],
             'moves': sub['moves'] as any[],
