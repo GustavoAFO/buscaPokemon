@@ -84,9 +84,62 @@
               <span class="col-sm-4" *ngFor="let type of result.types">
                 {{type.type.name}}
               </span>
+
+              <!-- Button to Open the Modal -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="toggleModal(result)">
+                Open modal
+              </button>
             </div>
           </div>
         </div>
+
+        <!-- The Modal -->
+        <div #myModal class="modal fade" id="myModal">
+          <div class="modal-dialog" *ngIf="atual != null">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div class="card mb-4 box-shadow">
+                  <img class="card-img-top" src="{{atual.sprites.front_default}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-text">{{atual.name}}</h4>
+                    <h5 class="card-text">Habilidades:</h5>
+
+
+                    <span class="col-sm-4 " *ngFor="let move of atual.moves">
+                      {{move.move.name}}
+                    </span>
+
+
+                    <h5 class="card-text">Espécie:</h5>
+                    <span class="col-sm-4" *ngFor="let type of atual.types">
+                      {{type.type.name}}
+                    </span>
+
+                    <!-- Button to Open the Modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                      Open modal
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
         <!-- 
         <div class="col-md-4">
           <div class="card mb-4 box-shadow">

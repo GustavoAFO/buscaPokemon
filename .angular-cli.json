@@ -23,8 +23,8 @@
         "css/album.css"
       ],
       "scripts": [
+        "js/jquery-3.3.1.min.js",
         "js/bootstrap.min.js",
-        "js/jquery.slim.min.js",
         "js/popper.min.js",
         "js/holder.min.js"
       ],

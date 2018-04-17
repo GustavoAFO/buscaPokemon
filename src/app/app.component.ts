@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AppService } from './app.service';
 import { HttpModule } from '@angular/http';
+import { ViewChild } from '@angular/core';
+import { ElementRef } from '@angular/core';
+import * as jQuery from 'jquery';
+
+declare let $: any;
 
 @Component({
   selector: 'app-root',
@@ -10,16 +15,25 @@ import { HttpModule } from '@angular/http';
   providers: [AppService]
 })
 export class AppComponent {
+  @ViewChild('myModal') myModal: ElementRef;
+
   title = 'app';
   dados_busca: any[];
   dados_especificos: any[] = [];
   count_busca: number;
   previous_busca: string;
   next_busca: string;
+  atual: any[] = null;
 
   collapsed = true;
   toggleCollapsed(): void {
     this.collapsed = !this.collapsed;
+  }
+
+
+  toggleModal(dado: any[]): void {
+    this.atual = dado;
+    $(this.myModal.nativeElement).modal('show');
   }
 
   constructor(private appservice: AppService) {
@@ -30,13 +44,13 @@ export class AppComponent {
   }
 
 
-/*
-  iniciarBuscaPorPokemonsEspecificos() {
-    this.dados_busca.forEach(item => {
-      this.buscarPokemonEspecifico(item['url']);
-    });
-  }
-*/
+  /*
+    iniciarBuscaPorPokemonsEspecificos() {
+      this.dados_busca.forEach(item => {
+        this.buscarPokemonEspecifico(item['url']);
+      });
+    }
+  */
 
 
 
