@@ -12,8 +12,10 @@ import { HttpModule } from '@angular/http';
 export class AppComponent {
   title = 'app';
   dados_busca: any[];
-  dados_especificos: any[];
+  dados_especificos: any[] = [];
   count_busca: number;
+  previous_busca: string;
+  next_busca: string;
 
   collapsed = true;
   toggleCollapsed(): void {
@@ -22,43 +24,65 @@ export class AppComponent {
 
   constructor(private appservice: AppService) {
 
-   // this.buscarTudo();
-   this.teste();
-  // console.log(this.dados_especificos);
+    // this.buscarTudo();
+    this.buscarTodos();
+    // console.log(this.dados_especificos);
   }
 
 
-
+/*
   iniciarBuscaPorPokemonsEspecificos() {
     this.dados_busca.forEach(item => {
       this.buscarPokemonEspecifico(item['url']);
     });
   }
+*/
 
 
-  teste() {
-    this.appservice.buscaListaCompleta().subscribe(data => {
-     this.appservice.buscarPokemonEspecifico(data['results']['url']).subscribe(sub => {
-       this.dados_especificos.push(sub);
-     })
-    });
-  }
 
-
-   buscarTudo() {
-     this.appservice.buscaListaCompleta().subscribe(data => {
-      this.dados_busca = data['results'];
+  buscarTodos() {
+    this.appservice.buscaListaCompleta().subscribe(async data => {
       this.count_busca = data['count'];
+      this.previous_busca = data['previous'];
+      this.next_busca = data['next'];
+      console.log(data);
+
+      data['results'].forEach(item => {
+        // console.log(item['url']);
+        this.appservice.buscarPokemonEspecifico(item['url']).subscribe(sub => {
+          // console.log(sub);
+
+
+          this.dados_especificos.push({
+            'sprites': sub['sprites'] as any[],
+            'forms': sub['forms'] as any[],
+            'types': sub['types'] as any[],
+            'moves': sub['moves'] as any[],
+            'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
+          });
+
+          // console.log(this.dados_especificos);
+
+        })
+      });
     });
 
-    // await this.iniciarBuscaPorPokemonsEspecificos();
+    // console.log(this.dados_especificos);
   }
 
-  buscarPokemonEspecifico(url: string) {
-    this.appservice.buscarPokemonEspecifico(url).subscribe(data => {
-      this.dados_especificos.push(data['aqui']);
-    });
-  }
+  /*
+    buscarTudo() {
+      this.appservice.buscaListaCompleta().subscribe(data => {
+        this.dados_busca = data['results'];
+        this.count_busca = data['count'];
+      });
+      // await this.iniciarBuscaPorPokemonsEspecificos();
+    }
+    buscarPokemonEspecifico(url: string) {
+      this.appservice.buscarPokemonEspecifico(url).subscribe(data => {
+        this.dados_especificos.push(data['aqui']);
+      });
+    }*/
 
 
 }
