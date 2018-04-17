@@ -45,10 +45,19 @@
 
         </div>
         <div class="col-sm-12 input-group mb-3">
-          <input type="text" class="form-control col-sm-4" placeholder="Pokemon" aria-label="Username">
-          <input type="text" class="form-control col-sm-4" placeholder="Habilidade" aria-label="Username">
-          <input type="text" class="form-control col-sm-4" placeholder="Espécie" aria-label="Username">
+          <input type="text" class="form-control col-sm-4" [(ngModel)]="txtNome" placeholder="Pokemon" aria-label="Pokemon">
+          <input type="text" class="form-control col-sm-4" [(ngModel)]="txtHabilidade" placeholder="Habilidade" aria-label="Habilidade">
+          <input type="text" class="form-control col-sm-4" [(ngModel)]="txtType" placeholder="Espécie" aria-label="Espécie">
         </div>
+
+        <h6 class="text-black col-sm-12">Exemplos:</h6>
+        <div class="col-sm-12 input-group mb-3">
+
+            <h6 class="text-black col-sm-4">charizard</h6>
+            <h6 class="text-black col-sm-4">battle-armor</h6>
+            <h6 class="text-black col-sm-4">flying</h6>
+  
+          </div>
 
         <div class="col-sm-12" style="padding-top: 20px">
             <button type="button" class="btn btn-primary col-sm-12"  (click)="filtrar()">

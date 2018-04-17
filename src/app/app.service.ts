@@ -8,6 +8,8 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class AppService {
 
+    status_api: string;
+
     headers: Headers;
     options: RequestOptions;
     constructor(public http: Http) {
@@ -32,8 +34,27 @@ export class AppService {
 
     }
 
+    buscaFiltroNome(nome: string) {
+        const url = 'https://pokeapi.co/api/v2/pokemon/' + nome;
+        return this.http.get(url, this.options).map(res => res.json()).catch(this.handleError);
+
+    }
+
+    buscaFiltroHabilidade(nome: string) {
+        const url = 'https://pokeapi.co/api/v2/ability/' + nome;
+        return this.http.get(url, this.options).map(res => res.json()).catch(this.handleError);
+
+    }
+
+    buscaFiltroType(nome: string) {
+        const url = 'https://pokeapi.co/api/v2/type/' + nome;
+        return this.http.get(url, this.options).map(res => res.json()).catch(this.handleError);
+
+    }
+
     handleError(error) {
         // console.log(error);
+        this.status_api = 'false';
         return Observable.throw(error.json().error || 'SERVER ERROR');
     }
 

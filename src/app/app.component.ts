@@ -18,12 +18,16 @@ export class AppComponent {
   @ViewChild('myModal') myModal: ElementRef;
 
   title = 'app';
-  dados_busca: any[];
+  status_api: boolean;
   dados_especificos: any[] = [];
   count_busca: number;
   previous_busca: string;
   next_busca: string;
   atual: any[] = null;
+
+  txtNome = '';
+  txtHabilidade = '';
+  txtType = '';
 
   collapsed = true;
   toggleCollapsed(): void {
@@ -46,12 +50,71 @@ export class AppComponent {
   }
 
   constructor(private appservice: AppService) {
-
+    // this.txtNome = this.appservice.status_api;
     // this.buscarTudo();
     this.buscarTodos();
     // console.log(this.dados_especificos);
   }
 
+  filtrar() {
+    this.dados_especificos = [];
+    this.next_busca = null;
+    if (this.txtNome) {
+
+      console.log(this.txtNome);
+      this.buscarFiltrandoNome();
+    } else if (this.txtHabilidade) {
+      this.buscarFiltrandoHabilidade();
+      console.log(this.txtHabilidade);
+    } else if (this.txtType) {
+
+      console.log(this.txtType);
+    } else {
+
+      this.buscarTodos();
+    }
+  }
+
+  buscarFiltrandoHabilidade() {
+    this.appservice.buscaFiltroHabilidade(this.txtHabilidade).subscribe(async data => {
+      console.log(data);
+
+      data['pokemon'].forEach(item => {
+        // console.log(item['url']);
+        this.appservice.buscarPokemonEspecifico(item['pokemon']['url']).subscribe(sub => {
+          // console.log(sub);
+          this.dados_especificos.push({
+            'sprites': sub['sprites'] as any[],
+            'forms': sub['forms'] as any[],
+            'types': sub['types'] as any[],
+            'moves': sub['moves'] as any[],
+            'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
+          });
+
+          // console.log(this.dados_especificos);
+
+        })
+      });
+    });
+
+
+  }
+
+  buscarFiltrandoNome() {
+    // console.log(item['url']);
+    this.appservice.buscaFiltroNome(this.txtNome).subscribe(sub => {
+      console.log(sub);
+      this.dados_especificos.push({
+        'sprites': sub['sprites'] as any[],
+        'forms': sub['forms'] as any[],
+        'types': sub['types'] as any[],
+        'moves': sub['moves'] as any[],
+        'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
+      });
+    })
+
+
+  }
 
   /*
     iniciarBuscaPorPokemonsEspecificos() {
@@ -122,16 +185,18 @@ export class AppComponent {
 
 
   buscarTodos() {
-    this.appservice.buscaListaCompleta().subscribe(async data => {
+
+    this.appservice.buscaListaCompleta().subscribe(data => {
       this.count_busca = data['count'];
       this.previous_busca = data['previous'];
       this.next_busca = data['next'];
-      console.log(data);
+      console.log('data aqui:' + data);
+
 
       data['results'].forEach(item => {
         // console.log(item['url']);
         this.appservice.buscarPokemonEspecifico(item['url']).subscribe(sub => {
-          // console.log(sub);
+          console.log(sub);
 
 
           this.dados_especificos.push({
@@ -147,6 +212,7 @@ export class AppComponent {
         })
       });
     });
+
 
     // console.log(this.dados_especificos);
   }
