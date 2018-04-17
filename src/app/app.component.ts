@@ -18,7 +18,6 @@ export class AppComponent {
   @ViewChild('myModal') myModal: ElementRef;
 
   title = 'app';
-  status_api: boolean;
   dados_especificos: any[] = [];
   count_busca: number;
   previous_busca: string;
@@ -28,6 +27,7 @@ export class AppComponent {
   txtNome = '';
   txtHabilidade = '';
   txtType = '';
+  status_api = 'Funcionando';
 
   collapsed = true;
   toggleCollapsed(): void {
@@ -41,19 +41,17 @@ export class AppComponent {
   }
 
   dismissModal() {
-    // console.log('trying');
-    // $(this.myModal.nativeElement).hide();
-    // $(this).hide();
+
     $(this.myModal.nativeElement).modal('hide');
     this.atual = null;
-    // $('#myModal').modal().hide();
+
   }
 
   constructor(private appservice: AppService) {
-    // this.txtNome = this.appservice.status_api;
-    // this.buscarTudo();
+
+
     this.buscarTodos();
-    // console.log(this.dados_especificos);
+
   }
 
   filtrar() {
@@ -67,7 +65,7 @@ export class AppComponent {
       this.buscarFiltrandoHabilidade();
       console.log(this.txtHabilidade);
     } else if (this.txtType) {
-
+      this.buscarFiltrandoType();
       console.log(this.txtType);
     } else {
 
@@ -75,7 +73,38 @@ export class AppComponent {
     }
   }
 
+  buscarFiltrandoType() {
+    this.status_api = 'Funcionando';
+
+    this.appservice.buscaFiltroType(this.txtType).subscribe(async data => {
+      console.log(data);
+
+
+      data['pokemon'].forEach(item => {
+        // console.log(item['url']);
+        this.appservice.buscarPokemonEspecifico(item['pokemon']['url']).subscribe(sub => {
+          // console.log(sub);
+          this.dados_especificos.push({
+            'sprites': sub['sprites'] as any[],
+            'forms': sub['forms'] as any[],
+            'types': sub['types'] as any[],
+            'moves': sub['moves'] as any[],
+            'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
+          });
+
+          // console.log(this.dados_especificos);
+
+        }, err => { this.status_api = 'Não Funcionando' })
+      });
+    }, err => { this.status_api = 'Não Funcionando' });
+
+
+  }
+
+
   buscarFiltrandoHabilidade() {
+    this.status_api = 'Funcionando';
+
     this.appservice.buscaFiltroHabilidade(this.txtHabilidade).subscribe(async data => {
       console.log(data);
 
@@ -93,15 +122,16 @@ export class AppComponent {
 
           // console.log(this.dados_especificos);
 
-        })
+        }, err => { this.status_api = 'Não Funcionando' })
       });
-    });
+    }, err => { this.status_api = 'Não Funcionando' });
 
 
   }
 
   buscarFiltrandoNome() {
-    // console.log(item['url']);
+    this.status_api = 'Funcionando';
+
     this.appservice.buscaFiltroNome(this.txtNome).subscribe(sub => {
       console.log(sub);
       this.dados_especificos.push({
@@ -111,51 +141,17 @@ export class AppComponent {
         'moves': sub['moves'] as any[],
         'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
       });
-    })
+    }, err => { this.status_api = 'Não Funcionando' })
 
 
   }
 
-  /*
-    iniciarBuscaPorPokemonsEspecificos() {
-      this.dados_busca.forEach(item => {
-        this.buscarPokemonEspecifico(item['url']);
-      });
-    }
-  */
-
-  /*
-  buscarPrevious() {
-    if (this.previous_busca != null) {
-      this.appservice.buscarPokemonEspecifico(this.next_busca).subscribe(async data => {
-        this.count_busca = data['count'];
-        this.previous_busca = data['previous'];
-        this.next_busca = data['next'];
-        console.log(data);
-
-        data['results'].forEach(item => {
-          // console.log(item['url']);
-          this.appservice.buscarPokemonEspecifico(item['url']).subscribe(sub => {
-            // console.log(sub);
 
 
-            this.dados_especificos.push({
-              'sprites': sub['sprites'] as any[],
-              'forms': sub['forms'] as any[],
-              'types': sub['types'] as any[],
-              'moves': sub['moves'] as any[],
-              'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
-            });
-
-            // console.log(this.dados_especificos);
-
-          })
-        });
-      });
-    }
-  }*/
 
   buscarNext() {
+    this.status_api = 'Funcionando';
+
     this.appservice.buscarPokemonEspecifico(this.next_busca).subscribe(async data => {
       this.count_busca = data['count'];
       this.previous_busca = data['previous'];
@@ -179,18 +175,19 @@ export class AppComponent {
           // console.log(this.dados_especificos);
 
         })
-      });
-    });
+      }, err => { this.status_api = 'Não Funcionando' });
+    }, err => { this.status_api = 'Não Funcionando' });
   }
 
 
   buscarTodos() {
+    this.status_api = 'Funcionando';
 
     this.appservice.buscaListaCompleta().subscribe(data => {
       this.count_busca = data['count'];
       this.previous_busca = data['previous'];
       this.next_busca = data['next'];
-      console.log('data aqui:' + data);
+      // console.log('data aqui:' + data);
 
 
       data['results'].forEach(item => {
@@ -207,29 +204,16 @@ export class AppComponent {
             'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
           });
 
-          // console.log(this.dados_especificos);
+
 
         })
-      });
-    });
+      }, err => { this.status_api = 'Não Funcionando' });
+    }, err => { this.status_api = 'Não Funcionando' });
 
 
-    // console.log(this.dados_especificos);
   }
 
-  /*
-    buscarTudo() {
-      this.appservice.buscaListaCompleta().subscribe(data => {
-        this.dados_busca = data['results'];
-        this.count_busca = data['count'];
-      });
-      // await this.iniciarBuscaPorPokemonsEspecificos();
-    }
-    buscarPokemonEspecifico(url: string) {
-      this.appservice.buscarPokemonEspecifico(url).subscribe(data => {
-        this.dados_especificos.push(data['aqui']);
-      });
-    }*/
+
 
 
 }

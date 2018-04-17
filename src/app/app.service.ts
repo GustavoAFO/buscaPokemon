@@ -8,13 +8,10 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class AppService {
 
-    status_api: string;
 
     headers: Headers;
     options: RequestOptions;
     constructor(public http: Http) {
-
-
 
         this.headers = new Headers({
             'Content-Type': 'application/json',
@@ -53,10 +50,10 @@ export class AppService {
     }
 
     handleError(error) {
-        // console.log(error);
-        this.status_api = 'false';
+
         return Observable.throw(error.json().error || 'SERVER ERROR');
     }
+
 
 
 }

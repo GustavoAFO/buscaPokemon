@@ -25,6 +25,11 @@
     <div class="container">
       <h1 class="jumbotron-heading">Busca de Pokemons</h1>
       <p class="lead text-muted">Projeto desenvolvido para avaliação na vaga de desenvolvimento Algar Tech.</p>
+      <div class="row">
+        <h4 class="text-black col-sm-4">Status da API:</h4>
+        <h4 class="text-black col-sm-8">{{status_api}}</h4>
+      </div>
+
       <!-- 
       <p>
         <a href="#" class="btn btn-primary my-2">Main call to action</a>
@@ -45,25 +50,28 @@
 
         </div>
         <div class="col-sm-12 input-group mb-3">
-          <input type="text" class="form-control col-sm-4" [(ngModel)]="txtNome" placeholder="Pokemon" aria-label="Pokemon">
-          <input type="text" class="form-control col-sm-4" [(ngModel)]="txtHabilidade" placeholder="Habilidade" aria-label="Habilidade">
-          <input type="text" class="form-control col-sm-4" [(ngModel)]="txtType" placeholder="Espécie" aria-label="Espécie">
+          <input type="text" class="form-control col-sm-4" [(ngModel)]="txtNome" placeholder="Pokemon" aria-label="Pokemon" (change)="txtHabilidade = '';txtType = ''"
+            (click)="txtHabilidade = '';txtType = ''">
+          <input type="text" class="form-control col-sm-4" [(ngModel)]="txtHabilidade" placeholder="Habilidade" aria-label="Habilidade"
+            (change)="txtNome = '';txtType = ''" (click)="txtNome = '';txtType = ''">
+          <input type="text" class="form-control col-sm-4" [(ngModel)]="txtType" placeholder="Espécie" aria-label="Espécie" (change)="txtNome = '';txtHabilidade = ''"
+            (click)="txtNome = '';txtHabilidade = ''">
         </div>
 
         <h6 class="text-black col-sm-12">Exemplos:</h6>
         <div class="col-sm-12 input-group mb-3">
 
-            <h6 class="text-black col-sm-4">charizard</h6>
-            <h6 class="text-black col-sm-4">battle-armor</h6>
-            <h6 class="text-black col-sm-4">flying</h6>
-  
-          </div>
+          <h6 class="text-black col-sm-4">charizard</h6>
+          <h6 class="text-black col-sm-4">battle-armor</h6>
+          <h6 class="text-black col-sm-4">flying</h6>
+
+        </div>
 
         <div class="col-sm-12" style="padding-top: 20px">
-            <button type="button" class="btn btn-primary col-sm-12"  (click)="filtrar()">
-              Filtrar
-            </button>
-          </div>
+          <button type="button" class="btn btn-primary col-sm-12" (click)="filtrar()">
+            Filtrar
+          </button>
+        </div>
 
         <!--
           <div class="col-sm-8 col-md-7 py-4">
@@ -84,9 +92,9 @@
   </section>
 
   <!-- The Modal -->
-  <div #myModal  class="modal fade" id="myModal">
-    <div class="modal-dialog" >
-      <div class="modal-content" *ngIf="atual != null" >
+  <div #myModal class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content" *ngIf="atual != null">
 
         <!-- Modal body -->
         <div class="modal-body">
@@ -193,7 +201,7 @@
 
 
     <div class="col-sm-12" style="padding-top: 20px" *ngIf="next_busca != null">
-      <button type="button" class="btn btn-primary col-sm-12"  (click)="buscarNext()">
+      <button type="button" class="btn btn-primary col-sm-12" (click)="buscarNext()">
         Ver mais
       </button>
     </div>
