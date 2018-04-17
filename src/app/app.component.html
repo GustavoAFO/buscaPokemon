@@ -4,47 +4,18 @@
     <div class="container d-flex justify-content-between">
       <a href="#" class="navbar-brand d-flex align-items-center">
         <!--<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>-->
-        <strong>PokeAPI</strong>
+        <strong>PokeAPI - GustavoAF</strong>
       </a>
+      <!--
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader"
         aria-expanded="false" aria-label="Toggle navigation" (click)="toggleCollapsed()">
         <span class="navbar-toggler-icon"></span>
       </button>
+      -->
     </div>
   </div>
   <div class="collapse bg-dark" id="navbarHeader" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
-    <div class="container">
-      <div class="row">
 
-        <div class="col-sm-4 input-group mb-3">
-
-          <h4 class="text-white col-sm-12">Nome do Pokemon</h4>
-          <h4 class="text-white col-sm-12">Nome da Habilidade</h4>
-          <h4 class="text-white col-sm-12">Espécie da Habilidade</h4>
-
-        </div>
-        <div class="col-sm-8">
-          <input type="text" class="form-control col-sm-12" placeholder="Pokemon" aria-label="Username">
-          <input type="text" class="form-control col-sm-12" placeholder="Habilidade" aria-label="Username">
-          <input type="text" class="form-control col-sm-12" placeholder="Espécie" aria-label="Username">
-        </div>
-
-        <!--
-        <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white">About</h4>
-          <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-        </div>
-        <div class="col-sm-4 offset-md-1 py-4">
-          <h4 class="text-white">Contact</h4>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Follow on Twitter</a></li>
-            <li><a href="#" class="text-white">Like on Facebook</a></li>
-            <li><a href="#" class="text-white">Email me</a></li>
-          </ul>
-        </div>
-        -->
-      </div>
-    </div>
   </div>
 </header>
 
@@ -61,7 +32,86 @@
       </p>
       -->
     </div>
+    <p></p>
+
+    <div class="container" style="padding-top: 75px;">
+      <h1 class="jumbotron-heading">Filtros</h1>
+      <div class="row">
+        <div class="col-sm-12 input-group mb-3">
+
+          <h4 class="text-black col-sm-4">Nome do Pokemon</h4>
+          <h4 class="text-black col-sm-4">Nome da Habilidade</h4>
+          <h4 class="text-black col-sm-4">Espécie da Habilidade</h4>
+
+        </div>
+        <div class="col-sm-12 input-group mb-3">
+          <input type="text" class="form-control col-sm-4" placeholder="Pokemon" aria-label="Username">
+          <input type="text" class="form-control col-sm-4" placeholder="Habilidade" aria-label="Username">
+          <input type="text" class="form-control col-sm-4" placeholder="Espécie" aria-label="Username">
+        </div>
+
+        <div class="col-sm-12" style="padding-top: 20px">
+            <button type="button" class="btn btn-primary col-sm-12"  (click)="filtrar()">
+              Filtrar
+            </button>
+          </div>
+
+        <!--
+          <div class="col-sm-8 col-md-7 py-4">
+            <h4 class="text-white">About</h4>
+            <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+          </div>
+          <div class="col-sm-4 offset-md-1 py-4">
+            <h4 class="text-white">Contact</h4>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white">Follow on Twitter</a></li>
+              <li><a href="#" class="text-white">Like on Facebook</a></li>
+              <li><a href="#" class="text-white">Email me</a></li>
+            </ul>
+          </div>
+          -->
+      </div>
+    </div>
   </section>
+
+  <!-- The Modal -->
+  <div #myModal  class="modal fade" id="myModal">
+    <div class="modal-dialog" >
+      <div class="modal-content" *ngIf="atual != null" >
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="card mb-4 box-shadow">
+            <img class="card-img-top" src="{{atual.sprites.front_default}}" alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-text">{{atual.name}}</h4>
+              <h5 class="card-text">Habilidades:</h5>
+
+
+              <span class="col-sm-4 " *ngFor="let move of atual.moves">
+                {{move.move.name}}
+              </span>
+
+
+              <h5 class="card-text">Espécie:</h5>
+              <span class="col-sm-4" *ngFor="let type of atual.types">
+                {{type.type.name}}
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="dismissModal()">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
 
   <div class="album py-5 bg-light">
     <div class="container">
@@ -86,59 +136,17 @@
               </span>
 
               <!-- Button to Open the Modal -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="toggleModal(result)">
-                Open modal
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- The Modal -->
-        <div #myModal class="modal fade" id="myModal">
-          <div class="modal-dialog" *ngIf="atual != null">
-            <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-
-              <!-- Modal body -->
-              <div class="modal-body">
-                <div class="card mb-4 box-shadow">
-                  <img class="card-img-top" src="{{atual.sprites.front_default}}" alt="Card image cap">
-                  <div class="card-body">
-                    <h4 class="card-text">{{atual.name}}</h4>
-                    <h5 class="card-text">Habilidades:</h5>
-
-
-                    <span class="col-sm-4 " *ngFor="let move of atual.moves">
-                      {{move.move.name}}
-                    </span>
-
-
-                    <h5 class="card-text">Espécie:</h5>
-                    <span class="col-sm-4" *ngFor="let type of atual.types">
-                      {{type.type.name}}
-                    </span>
-
-                    <!-- Button to Open the Modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                      Open modal
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <div class="col-sm-12" style="padding-top: 20px">
+                <button type="button" class="btn btn-primary col-sm-12" data-toggle="modal" data-target="#myModal" (click)="toggleModal(result)">
+                  Ver Informações completas
+                </button>
               </div>
 
             </div>
           </div>
         </div>
+
+
 
         <!-- 
         <div class="col-md-4">
@@ -172,6 +180,28 @@
 
       </div>
     </div>
+
+
+
+    <div class="col-sm-12" style="padding-top: 20px" *ngIf="next_busca != null">
+      <button type="button" class="btn btn-primary col-sm-12"  (click)="buscarNext()">
+        Ver mais
+      </button>
+    </div>
+
+    <!--
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" (click)="buscarPrevious()" tabindex="-1">Previous</a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" (click)="buscarNext()">Next</a>
+        </li>
+      </ul>
+    </nav>
+    -->
   </div>
 
 </main>

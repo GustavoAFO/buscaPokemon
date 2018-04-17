@@ -36,6 +36,15 @@ export class AppComponent {
     $(this.myModal.nativeElement).modal('show');
   }
 
+  dismissModal() {
+    // console.log('trying');
+    // $(this.myModal.nativeElement).hide();
+    // $(this).hide();
+    $(this.myModal.nativeElement).modal('hide');
+    this.atual = null;
+    // $('#myModal').modal().hide();
+  }
+
   constructor(private appservice: AppService) {
 
     // this.buscarTudo();
@@ -52,6 +61,64 @@ export class AppComponent {
     }
   */
 
+  /*
+  buscarPrevious() {
+    if (this.previous_busca != null) {
+      this.appservice.buscarPokemonEspecifico(this.next_busca).subscribe(async data => {
+        this.count_busca = data['count'];
+        this.previous_busca = data['previous'];
+        this.next_busca = data['next'];
+        console.log(data);
+
+        data['results'].forEach(item => {
+          // console.log(item['url']);
+          this.appservice.buscarPokemonEspecifico(item['url']).subscribe(sub => {
+            // console.log(sub);
+
+
+            this.dados_especificos.push({
+              'sprites': sub['sprites'] as any[],
+              'forms': sub['forms'] as any[],
+              'types': sub['types'] as any[],
+              'moves': sub['moves'] as any[],
+              'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
+            });
+
+            // console.log(this.dados_especificos);
+
+          })
+        });
+      });
+    }
+  }*/
+
+  buscarNext() {
+    this.appservice.buscarPokemonEspecifico(this.next_busca).subscribe(async data => {
+      this.count_busca = data['count'];
+      this.previous_busca = data['previous'];
+      this.next_busca = data['next'];
+      console.log(data);
+
+      data['results'].forEach(item => {
+        // console.log(item['url']);
+        this.appservice.buscarPokemonEspecifico(item['url']).subscribe(sub => {
+          // console.log(sub);
+
+
+          this.dados_especificos.push({
+            'sprites': sub['sprites'] as any[],
+            'forms': sub['forms'] as any[],
+            'types': sub['types'] as any[],
+            'moves': sub['moves'] as any[],
+            'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
+          });
+
+          // console.log(this.dados_especificos);
+
+        })
+      });
+    });
+  }
 
 
   buscarTodos() {
