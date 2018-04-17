@@ -4,6 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
+Português:
+Rode o comando `ng serve` para um servidor de desenvolvimento. Abra uma página web no endereço `http://localhost:4200/`. O aplicativo atualizará altomaticamente de acordo com qualquer mudança de código fonte executada.
+
+English:
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
