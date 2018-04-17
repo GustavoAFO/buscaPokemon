@@ -2,7 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
 
-## Development server
+## Requerimentos
+npm
+ng
+
+## Servidor de Desenvolvimento Development server
 
 Português:
 Rode o comando `ng serve` para um servidor de desenvolvimento. Abra uma página web no endereço `http://localhost:4200/`. O aplicativo atualizará altomaticamente de acordo com qualquer mudança de código fonte executada.
