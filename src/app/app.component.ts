@@ -94,9 +94,9 @@ export class AppComponent {
 
           // console.log(this.dados_especificos);
 
-        }, err => { this.status_api = 'Não Funcionando' })
+        }, err => { this.status_api = 'Não Funcionando'; })
       });
-    }, err => { this.status_api = 'Não Funcionando' });
+    }, err => { this.status_api = 'Não Funcionando'; });
 
 
   }
@@ -122,9 +122,9 @@ export class AppComponent {
 
           // console.log(this.dados_especificos);
 
-        }, err => { this.status_api = 'Não Funcionando' })
+        }, err => { this.status_api = 'Não Funcionando'; })
       });
-    }, err => { this.status_api = 'Não Funcionando' });
+    }, err => { this.status_api = 'Não Funcionando'; });
 
 
   }
@@ -141,7 +141,7 @@ export class AppComponent {
         'moves': sub['moves'] as any[],
         'name': sub['name'].charAt(0).toUpperCase() + sub['name'].slice(1) as string
       });
-    }, err => { this.status_api = 'Não Funcionando' })
+    }, err => { this.status_api = 'Não Funcionando'; })
 
 
   }
@@ -175,8 +175,8 @@ export class AppComponent {
           // console.log(this.dados_especificos);
 
         })
-      }, err => { this.status_api = 'Não Funcionando' });
-    }, err => { this.status_api = 'Não Funcionando' });
+      }, err => { this.status_api = 'Não Funcionando'; });
+    }, err => { this.status_api = 'Não Funcionando'; });
   }
 
 
@@ -207,8 +207,12 @@ export class AppComponent {
 
 
         })
-      }, err => { this.status_api = 'Não Funcionando' });
-    }, err => { this.status_api = 'Não Funcionando' });
+      }, err => {
+        this.status_api = 'Não Funcionando';
+      });
+    }, err => {
+      this.status_api = 'Não Funcionando';
+    });
 
 
   }
